@@ -1,0 +1,14 @@
+name = "benmoussa96/cardano-mynth"
+version = "0.0.0"
+license = "Apache-2.0"
+description = "Aiken contracts for project 'benmoussa96/cardano-mynth'"
+
+[repository]
+user = "benmoussa96"
+project = "cardano-mynth"
+platform = "github"
+
+[[dependencies]]
+name = "aiken-lang/stdlib"
+version = "1.7.0"
+source = "github"
