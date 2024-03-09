@@ -5,6 +5,7 @@
   "description": "A Cardano smart contract that allows users to deposit ADA into the contract and only the owner of the contract can withdraw it",
   "scripts": {
     "generate-credentials": "tsc && node dist/generate-credentials.js",
+    "lock": "tsc && node dist/lock.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "lucid-cardano": "^0.8.3"
   }
 }
