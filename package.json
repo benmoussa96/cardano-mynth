@@ -1,12 +1,10 @@
 {
   "name": "cardano-mynth",
   "version": "1.0.0",
-  "description": "Write validators in the `validators` folder, and supporting functions in the `lib` folder using `.ak` as a file extension.",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "type": "module",
+  "description": "A Cardano smart contract that allows users to deposit ADA into the contract and only the owner of the contract can withdraw it",
   "scripts": {
+    "generate-credentials": "tsc && node dist/generate-credentials.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,5 +13,8 @@
   "devDependencies": {
     "@types/node": "^20.11.25",
     "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "lucid-cardano": "^0.8.3"
   }
 }
