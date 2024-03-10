@@ -1,14 +1,4 @@
-import {
-  Blockfrost,
-  C,
-  Constr,
-  Data,
-  Lucid,
-  SpendingValidator,
-  TxHash,
-  fromHex,
-  toHex,
-} from "lucid-cardano";
+import { Blockfrost, Constr, Data, Lucid, SpendingValidator, TxHash } from "lucid-cardano";
 import * as fs from "fs";
 import "dotenv/config";
 
@@ -41,7 +31,7 @@ const txHash = await lock(1000000n, { into: validator, owner: datum });
 await lucid.awaitTx(txHash);
 
 console.log(`1 tADA locked into the contract at:
-      Tx ID: ${txHash}
+      Tx hash: ${txHash}
       Datum: ${datum}
   `);
 

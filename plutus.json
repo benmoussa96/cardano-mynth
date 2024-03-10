@@ -13,20 +13,14 @@
   "validators": [
     {
       "title": "contract.hello_world",
-      "datum": {
+      "redeemer": {
         "title": "datum",
         "schema": {
           "$ref": "#/definitions/contract~1Datum"
         }
       },
-      "redeemer": {
-        "title": "redeemer",
-        "schema": {
-          "$ref": "#/definitions/contract~1Redeemer"
-        }
-      },
-      "compiledCode": "58f2010000323232323232323222232325333008323232533300b002100114a06644646600200200644a66602200229404c8c94ccc040cdc78010028a511330040040013014002375c60240026eb0c038c03cc03cc03cc03cc03cc03cc03cc03cc020c008c020014dd71801180400399b8f375c6002600e00a91010d48656c6c6f2c20576f726c6421002300d00114984d958c94ccc020cdc3a400000226464a66601a601e0042930b1bae300d00130060041630060033253330073370e900000089919299980618070010a4c2c6eb8c030004c01401058c01400c8c014dd5000918019baa0015734aae7555cf2ab9f5742ae881",
-      "hash": "6fb13cf9efdbe986e784d1983b21d3fb90231c1745925f536a820fb4"
+      "compiledCode": "58bf010000323232323232323222325333006323253330083370e9001000899199119198008008019129998080008a5013232533300f3371e00400a29444cc010010004c04c008dd718088009bac300d300e300e300e300e300e300e300e300e300730013007005375c6002600e00c4601a0022940c018004c028c02cc010008526136563253330063370e900000089919299980598068010a4c2c6eb8c02c004c01000c58c0100088c014dd5000918019baa0015734aae7555cf2ab9f5742ae89",
+      "hash": "a3d753f82c654d1e3cda86fc0f24f725a40cc6cf145986371e40e8c5"
     }
   ],
   "definitions": {
@@ -43,22 +37,6 @@
           "fields": [
             {
               "title": "owner",
-              "$ref": "#/definitions/ByteArray"
-            }
-          ]
-        }
-      ]
-    },
-    "contract/Redeemer": {
-      "title": "Redeemer",
-      "anyOf": [
-        {
-          "title": "Redeemer",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "title": "msg",
               "$ref": "#/definitions/ByteArray"
             }
           ]
