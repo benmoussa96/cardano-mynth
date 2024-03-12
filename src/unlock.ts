@@ -7,6 +7,7 @@ import {
   TxHash,
   OutRef,
   Redeemer,
+  utf8ToHex,
 } from "lucid-cardano";
 import * as fs from "fs";
 import inquirer from "inquirer";
@@ -27,23 +28,25 @@ inquirer
       "Preview"
     );
 
-    lucid.selectWalletFromPrivateKey(await fs.readFileSync("me.sk", "utf8"));
+    lucid.selectWalletFromPrivateKey(fs.readFileSync("me.sk", "utf8"));
 
     const validator = await readValidator();
 
     // --- Supporting functions
 
     async function readValidator(): Promise<SpendingValidator> {
-      const validator = JSON.parse(await fs.readFileSync("plutus.json", "utf8")).validators[0];
+      const validator = JSON.parse(fs.readFileSync("plutus.json", "utf8")).validators[0];
       return {
         type: "PlutusV2",
         script: validator.compiledCode,
+        // script: toHex(cbor.encode(fromHex(validator.compiledCode))),
       };
     }
 
     const utxo: OutRef = { txHash: answers.txHash, outputIndex: 0 };
 
-    const redeemer = Data.empty();
+    // const redeemer = Data.empty();
+    const redeemer = Data.to(new Constr(0, [utf8ToHex("Hello, World!")]));
 
     const txHash = await unlock(utxo, {
       from: validator,
@@ -66,16 +69,16 @@ inquirer
       const [utxo] = await lucid.utxosByOutRef([ref]);
       const signer = await lucid.wallet.address();
 
-      console.log("address:", signer);
-      console.log("txHash:", ref.txHash);
-      console.log("using:", using);
+      console.log("signer:", signer);
+      console.log("utxo:", utxo);
+      console.log("validator:", from);
+      console.log("redeemer:", using);
 
       const tx = await lucid
         .newTx()
-        // .collectFrom([utxo])
         .collectFrom([utxo], using)
-        .addSigner(signer)
         .attachSpendingValidator(from)
+        .addSigner(signer)
         .complete();
 
       const signedTx = await tx.sign().complete();

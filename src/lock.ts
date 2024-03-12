@@ -7,14 +7,14 @@ const lucid = await Lucid.new(
   "Preview"
 );
 
-lucid.selectWalletFromPrivateKey(await fs.readFileSync("me.sk", "utf8"));
+lucid.selectWalletFromPrivateKey(fs.readFileSync("me.sk", "utf8"));
 
 const validator = await readValidator();
 
 // --- Supporting functions
 
 async function readValidator(): Promise<SpendingValidator> {
-  const validator = JSON.parse(await fs.readFileSync("plutus.json", "utf8")).validators[0];
+  const validator = JSON.parse(fs.readFileSync("plutus.json", "utf8")).validators[0];
   return {
     type: "PlutusV2",
     script: validator.compiledCode,
@@ -37,12 +37,12 @@ console.log(`1 tADA locked into the contract at:
 
 // --- Supporting functions
 
-async function lock(
+export async function lock(
   lovelace: bigint,
   { into, owner }: { into: SpendingValidator; owner: string }
 ): Promise<TxHash> {
   const contractAddress = lucid.utils.validatorToAddress(into);
-  console.log(`contractAddress: ${contractAddress}`);
+
   const tx = await lucid
     .newTx()
     .payToContract(contractAddress, { inline: owner }, { lovelace })
